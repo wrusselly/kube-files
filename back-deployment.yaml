@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+        name: back
+        labels:
+                app: back
+spec:
+        replicas: 1
+        selector:
+                matchLabels:
+                        app: back
+        template:
+                metadata:
+                        labels:
+                                app: back
+                spec:
+                        containers:
+                                - name: back
+                                  image: docker.io/wrusselly/spring-todo
+                                  ports:
+                                          - containerPort: 9090
+                                  env:
+                                          - name: MYSQL_IP 
+                                            value: mysql  
+
