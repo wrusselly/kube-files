@@ -16,7 +16,7 @@ spec:
       serviceAccountName: jenkins-service-account
       containers:
       - name: jenkins
-        image: bobcrutchley/jenkins
+        image: jenkins/jenkins
         ports:
         - name: http-port
           containerPort: 8080
