@@ -14,8 +14,12 @@ spec:
         app: jenkins
     spec:
       serviceAccountName: jenkins-service-account
+      securityContext:
+        fsGroup: 1000
       containers:
       - name: jenkins
+        securityContext:
+          runAsUser: 1000
         image: jenkins/jenkins
         ports:
         - name: http-port
@@ -27,9 +31,8 @@ spec:
           mountPath: /var/run/docker.sock
       volumes:
         - name: jenkins-home
-          gcePersistentDisk:
-            pdName: jenkins-test
-            fsType: ext4
+          persistentVolumeClaim:
+                  claimName: jenkins-home
         - name: docker-socket
           hostPath:
             path: /var/run/docker.sock
